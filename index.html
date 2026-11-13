@@ -213,6 +213,24 @@ footer ul{list-style:none;display:grid;gap:8px}
 footer a:hover{color:var(--teal)}
 .disc{border-top:1px solid #D3ECE8;margin-top:40px;padding-top:24px;font-size:12.5px;line-height:1.7;color:var(--slate)}
 
+
+.res-one{grid-template-columns:1fr;max-width:760px}
+.book-dl{margin-top:12px;padding:10px 18px;font-size:14px}
+.car-hint{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #CFE9E4;border-radius:999px;padding:9px 18px;font-size:13px;color:var(--ink);box-shadow:var(--shadow);pointer-events:none;white-space:nowrap;transition:opacity .5s}
+.car-hint.gone{opacity:0}
+.ch-arr{color:var(--teal);font-weight:800;animation:chnudge 1.4s ease-in-out infinite}
+.ch-arr:last-child{animation-direction:reverse}
+.ch-hand{color:var(--deep);display:inline-flex;animation:chswipe 1.8s ease-in-out infinite}
+@keyframes chnudge{0%,100%{transform:translateX(0);opacity:.5}50%{transform:translateX(-5px);opacity:1}}
+@keyframes chswipe{0%,100%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
+.car-btn{animation:chpulse 2.4s ease-in-out infinite}
+@keyframes chpulse{0%,100%{box-shadow:var(--shadow)}50%{box-shadow:0 0 0 8px rgba(46,139,152,.14)}}
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal[hidden]{display:none}
+.modal-back{position:absolute;inset:0;background:rgba(235,246,245,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal-box{position:relative;width:100%;max-width:460px;max-height:calc(100vh - 32px);overflow:auto;animation:rcin .3s ease both}
+.modal-x{position:absolute;right:14px;top:10px;z-index:2;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;color:var(--slate);cursor:pointer}
+@media (max-width:640px){.car-hint{font-size:12px;padding:8px 14px}}
 /* floating whatsapp + mobile bar */
 .fab{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;align-items:center;gap:12px}
 .fab .bubble{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;padding:10px 14px;font-size:13px;font-weight:600;opacity:0;transform:translateX(10px);transition:all .5s;pointer-events:none}
@@ -286,7 +304,7 @@ svg.cs .cf{transform-box:fill-box;transform-origin:center bottom;animation:cform
 
 /* setup gallery */
 .gallery-sec{background:none;overflow:hidden}
-.car{position:relative;height:470px;perspective:1500px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.car{position:relative;height:510px;perspective:1500px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
 .car:active{cursor:grabbing}
 .car-ring{position:absolute;left:50%;top:40px;width:300px;height:390px;margin-left:-150px;transform-style:preserve-3d}
 .ccard{position:absolute;inset:0;background:#fff;border:1px solid #D3ECE8;border-radius:24px;padding:20px 20px 22px;box-shadow:0 30px 60px -34px rgba(22,32,63,.4);display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden}
@@ -299,7 +317,7 @@ svg.cs .cf{transform-box:fill-box;transform-origin:center bottom;animation:cform
 .car-btn:hover{transform:scale(1.08)}.car-btn.prev{left:4px}.car-btn.next{right:4px}
 .car-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin-top:18px}
 .car-now{width:100%;text-align:center;font-weight:700;color:var(--slate);font-size:14px}
-@media (max-width:640px){.car{height:440px}.ccard{padding:16px}.car-cta .btn{width:100%;justify-content:center}.car-btn{display:none}}
+@media (max-width:640px){.car{height:480px}.ccard{padding:16px}.car-cta .btn{width:100%;justify-content:center}.car-btn{display:none}}
 
 /* the four rules: scroll-driven chapters */
 .rules-sec{padding:30px 0 0;background:none}
@@ -459,8 +477,7 @@ body{position:relative}
       <h1>Read the market by its <em>structure</em>, not by guesswork.</h1>
       <p class="lead">For swing traders who already read charts. Pushes and pullbacks, horizontal zones, daily closes and three entry models. That is the whole system.</p>
       <div class="hero-cta">
-        <a class="btn btn-wa js-wa" href="#" style="white-space:normal;text-align:center"><svg><use href="#wa"/></svg>Connect on WhatsApp for more resources &amp; materials</a>
-        <a class="btn btn-ghost" href="#free">Get the real setups PDF &rarr;</a>
+        <a class="btn btn-dark js-pdf" href="#free">Get the real setups PDF &rarr;</a>
       </div>
       <div class="ticks"><span>Pure price structure</span><span>Horizontal zones</span><span>Daily-close confirmation</span></div>
     </div>
@@ -521,7 +538,7 @@ body{position:relative}
     <div class="sec-head center reveal" style="text-align:center">
       <span class="eyebrow">Real setups · 3D gallery</span>
       <h2>Flip through <em>real</em> setups.</h2>
-      <p class="lead center">Each card is a real NSE chart from history, marked by structure. Drag to turn the gallery, then comment the trigger word to get the full PDF.</p>
+      <p class="lead center">Each card is a real NSE chart from history, marked by structure. Swipe through the cards to see every setup in 3D.</p>
     </div>
     <div class="car reveal" id="car">
       <div class="car-ring" id="carRing">
@@ -532,13 +549,13 @@ body{position:relative}
         <article class="ccard"><span class="ck">STRUCTURE</span><h3>Pushes and pullbacks</h3><svg viewBox="0 0 300 150" class="mv cs" data-m="push" data-lab="1" data-anim="1" data-cap="1"></svg><p>Higher highs and higher lows, read straight off the price.</p></article>
         <article class="ccard"><span class="ck">STRUCTURE</span><h3>One horizontal zone</h3><svg viewBox="0 0 300 150" class="mv cs" data-m="zone" data-z="top" data-anim="1" data-cap="1"></svg><p>Never a single line. The zone is where past structure turned price.</p></article>
       </div>
+      <div class="car-hint" id="carHint" aria-hidden="true"><span class="ch-arr">&larr;</span><span class="ch-hand"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5a2 2 0 0 1 4 0v6"/><path d="M13 10a2 2 0 0 1 4 0v3"/><path d="M17 12.5a2 2 0 0 1 4 0V15a7 7 0 0 1-7 7h-1.5a6 6 0 0 1-5-2.7L4.5 15a2 2 0 0 1 3.3-2.2L9 14"/></svg></span><b>Swipe to see the Setups</b><span class="ch-arr">&rarr;</span></div>
       <button class="car-btn prev" id="carPrev" aria-label="Previous setup">&larr;</button>
       <button class="car-btn next" id="carNext" aria-label="Next setup">&rarr;</button>
     </div>
     <div class="car-cta reveal">
       <div class="car-now" id="carNow"></div>
-      <a class="btn btn-dark" href="#free">Get the real setups PDF &rarr;</a>
-      <a class="btn btn-wa js-wa" href="#"><svg><use href="#wa"/></svg>Comment on Instagram or message me</a>
+      <a class="btn btn-dark js-pdf" href="#free">Get the real setups PDF &rarr;</a>
     </div>
     <p class="compass-note">Real historical charts, for learning only. Not a recommendation to buy or sell.</p>
   </div>
@@ -591,36 +608,15 @@ body{position:relative}
   </div>
 </section>
 <section class="res" id="free">
-  <div class="wrap res-grid">
+  <div class="wrap res-grid res-one">
     <div class="reveal">
       <span class="eyebrow">Free resources</span>
       <h2 style="margin:14px 0 16px">Real historical setups, <em>marked</em> structure by structure.</h2>
-      <p class="lead" style="margin-bottom:34px">Every setup is a real Indian stock chart from history, with the zone, the daily close and the entry model marked. Fill in your details and the downloads open right away.</p>
+      <p class="lead" style="margin-bottom:34px">Every setup is a real Indian stock chart from history, with the zone, the daily close and the entry model marked. Tap a booklet to download it. We ask for your details once, then the downloads open right away.</p>
       <div class="books">
-        <div class="book"><div class="cover c1"><span>PULLBACK</span>25 SETUPS<svg viewBox="0 0 60 40" class="cs" data-m="retrace" data-white="1"></svg></div><div><h4>25 Retracement Setups</h4><p>Pullbacks into higher-low zones, with the 1-hour shift that triggered each entry.</p><span class="tag">PDF · TRIGGER WORD PULLBACK</span></div></div>
-        <div class="book"><div class="cover c2"><span>BREAKOUT</span>25 SETUPS<svg viewBox="0 0 60 40" class="cs" data-m="retest" data-white="1"></svg></div><div><h4>25 Break and Retest Setups</h4><p>Daily closes through a horizontal zone, and the retest that held.</p><span class="tag">PDF · TRIGGER WORD BREAKOUT</span></div></div>
-        <div class="book"><div class="cover c3"><span>REVERSAL</span>25 SETUPS<svg viewBox="0 0 60 40" class="cs" data-m="reversal" data-white="1"></svg></div><div><h4>25 Structural Reversal Setups</h4><p>Macro trend shifts and traps, each confirmed by a change of structure.</p><span class="tag">PDF · TRIGGER WORD REVERSAL</span></div></div>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="form-card">
-        <form id="lead" novalidate>
-          <h3>Send me the real setups</h3>
-          <p class="sub">Takes 20 seconds. No spam, ever.</p>
-          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" placeholder="Your first name" required></div>
-          <div class="field"><label for="f-phone">WhatsApp number</label><div class="phone"><span>+91</span><input id="f-phone" name="phone" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" required></div></div>
-          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <label class="consent"><input type="checkbox" id="f-consent" required><span>I agree to receive the setups and occasional learning updates from Swing Trading Guide on WhatsApp and email. I can opt out any time by replying STOP.</span></label>
-          <button class="btn btn-dark" type="submit" id="f-btn">Unlock the setups &rarr;</button>
-          <div class="err" id="f-err" role="alert"></div>
-        </form>
-        <div class="done" id="done">
-          <h3>You are in, <em id="d-name">friend</em>.</h3>
-          <p class="sub">Your setups are ready. Save them to your phone.</p>
-          <div id="d-links"></div>
-          <div class="next"><b>One more step:</b> join the WhatsApp Channel for new lessons and chart breakdowns.<br><a class="btn btn-wa js-ch" href="#"><svg><use href="#ch"/></svg>Join the WhatsApp Channel</a></div>
-        </div>
+        <div class="book"><div class="cover c1"><span>PULLBACK</span>BOOKLET<svg viewBox="0 0 60 40" class="cs" data-m="retrace" data-white="1"></svg></div><div><h4>Retracement Setups Booklet</h4><p>Pullbacks into higher-low zones, with the 1-hour shift that triggered each entry.</p><span class="tag">PDF · TRIGGER WORD PULLBACK</span><a class="btn btn-dark book-dl js-pdf" href="#free">Download PDF &darr;</a></div></div>
+        <div class="book"><div class="cover c2"><span>BREAKOUT</span>BOOKLET<svg viewBox="0 0 60 40" class="cs" data-m="retest" data-white="1"></svg></div><div><h4>Break and Retest Setups Booklet</h4><p>Daily closes through a horizontal zone, and the retest that held.</p><span class="tag">PDF · TRIGGER WORD BREAKOUT</span><a class="btn btn-dark book-dl js-pdf" href="#free">Download PDF &darr;</a></div></div>
+        <div class="book"><div class="cover c3"><span>REVERSAL</span>BOOKLET<svg viewBox="0 0 60 40" class="cs" data-m="reversal" data-white="1"></svg></div><div><h4>Structural Reversal Setups Booklet</h4><p>Macro trend shifts and traps, each confirmed by a change of structure.</p><span class="tag">PDF · TRIGGER WORD REVERSAL</span><a class="btn btn-dark book-dl js-pdf" href="#free">Download PDF &darr;</a></div></div>
       </div>
     </div>
   </div>
@@ -674,7 +670,7 @@ body{position:relative}
   <div class="wrap">
     <div class="sec-head center reveal" style="text-align:center"><span class="eyebrow">Questions</span><h2>Good to <em>know</em>.</h2></div>
     <div class="faq reveal">
-      <details open><summary>Are the setups PDFs really free?</summary><p>Yes. Fill in the form and the PDFs open immediately. No payment, no card.</p></details>
+      <details open><summary>Are the setups PDFs really free?</summary><p>Yes. Tap Download, enter your details once, and the PDFs open immediately. No payment, no card.</p></details>
       <details><summary>Do you give buy or sell tips?</summary><p>No. Swing Trading Guide is education only. We teach you how to read a chart yourself, so you do not depend on anyone's tips.</p></details>
       <details><summary>Who is this for?</summary><p>Swing traders who already read charts and want one clean system: market structure, horizontal zones, daily closes and three entry models. Lessons are in Tamil and English.</p></details>
       <details><summary>What are the Instagram trigger words?</summary><p>Comment PULLBACK, BREAKOUT or REVERSAL on a Reel to get that setups PDF in your DM, or STRUCTURE for the general one. You can also get them here with the form.</p></details>
@@ -707,6 +703,32 @@ body{position:relative}
   </div>
 </footer>
 
+<div class="modal" id="pdfModal" role="dialog" aria-modal="true" aria-label="Download the setups PDFs" hidden>
+  <div class="modal-back" data-close></div>
+  <div class="modal-box">
+    <button class="modal-x" data-close aria-label="Close">&times;</button>
+    <div class="form-card">
+        <form id="lead" novalidate>
+          <h3>Get the real setups</h3>
+          <p class="sub">Takes 20 seconds. No spam, ever.</p>
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" placeholder="Your first name" required></div>
+          <div class="field"><label for="f-phone">WhatsApp number</label><div class="phone"><span>+91</span><input id="f-phone" name="phone" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" required></div></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+          <div class="field"><label for="f-city">City</label><input id="f-city" name="city" autocomplete="address-level2" placeholder="Your city" required></div>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="consent"><input type="checkbox" id="f-consent" required><span>I agree to receive the setups and occasional learning updates from Swing Trading Guide on WhatsApp and email. I can opt out any time by replying STOP.</span></label>
+          <button class="btn btn-dark" type="submit" id="f-btn">Download the PDFs &rarr;</button>
+          <div class="err" id="f-err" role="alert"></div>
+        </form>
+        <div class="done" id="done">
+          <h3>You are in, <em id="d-name">friend</em>.</h3>
+          <p class="sub">Your setups are ready. Save them to your phone.</p>
+          <div id="d-links"></div>
+          <div class="next"><b>One more step:</b> join the WhatsApp Channel for new lessons and chart breakdowns.<br><a class="btn btn-wa js-ch" href="#"><svg><use href="#ch"/></svg>Join the WhatsApp Channel</a></div>
+        </div>
+      </div>
+  </div>
+</div>
 <div class="fab" id="fab"><span class="bubble">Questions? Message me</span><a class="js-wa" href="#" aria-label="Message on WhatsApp"><svg><use href="#wa"/></svg></a></div>
 <div class="mbar"><a class="btn btn-wa js-wa" href="#"><svg><use href="#wa"/></svg>Message me</a><a class="btn btn-dark js-ch" href="#"><svg><use href="#ch"/></svg>Join Channel</a></div>
 
@@ -1139,19 +1161,30 @@ body{position:relative}
     })();
   })();
 
+
+  // download dialog
+  var modal = document.getElementById('pdfModal');
+  function openModal(e){ if(e) e.preventDefault(); modal.hidden = false; document.body.style.overflow = 'hidden'; }
+  function closeModal(){ modal.hidden = true; document.body.style.overflow = ''; }
+  document.querySelectorAll('.js-pdf').forEach(function(a){ a.addEventListener('click', openModal); });
+  modal.querySelectorAll('[data-close]').forEach(function(a){ a.addEventListener('click', closeModal); });
+  addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) closeModal(); });
+  // 3D gallery hint disappears once the visitor interacts
+  (function(){ var h = document.getElementById('carHint'), c = document.getElementById('car'); if(!h || !c) return; var hide = function(){ h.classList.add('gone'); }; c.addEventListener('pointerdown', hide, {once:true}); c.addEventListener('wheel', hide, {once:true, passive:true}); document.getElementById('carPrev').addEventListener('click', hide); document.getElementById('carNext').addEventListener('click', hide); })();
   // lead form
   var form = document.getElementById('lead'), err = document.getElementById('f-err'), btn = document.getElementById('f-btn');
   form.addEventListener('submit', function(e){
     e.preventDefault(); err.textContent = '';
-    var F = form.elements, name = F['name'].value.trim(), phone = F['phone'].value.replace(/\D/g, ''), email = F['email'].value.trim();
+    var F = form.elements, name = F['name'].value.trim(), phone = F['phone'].value.replace(/\D/g, ''), email = F['email'].value.trim(), city = F['city'].value.trim();
     if(phone.length === 12 && phone.indexOf('91') === 0) phone = phone.slice(2);
     if(!name) return err.textContent = 'Please enter your name.';
+    if(city.length < 2) return err.textContent = 'Please enter your city.';
     if(!/^[6-9]\d{9}$/.test(phone)) return err.textContent = 'Please enter a valid 10-digit WhatsApp number.';
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err.textContent = 'Please enter a valid email.';
     if(!document.getElementById('f-consent').checked) return err.textContent = 'Please tick the consent box to receive the setups.';
     if(F['website'].value) return;
     btn.disabled = true; btn.textContent = 'Sending...';
-    var body = new URLSearchParams({name:name, phone:'+91' + phone, email:email, consent:'yes', src:src, page:location.pathname, ua:navigator.userAgent.slice(0, 120)});
+    var body = new URLSearchParams({name:name, phone:'+91' + phone, email:email, city:city, consent:'yes', src:src, page:location.pathname, ua:navigator.userAgent.slice(0, 120)});
     var finish = function(){
       form.style.display = 'none';
       document.getElementById('d-name').textContent = name.split(' ')[0];
@@ -1165,7 +1198,7 @@ body{position:relative}
       document.getElementById('done').classList.add('show');
     };
     if(!C.formEndpoint){ finish(); return; }
-    fetch(C.formEndpoint, {method:'POST', mode:'no-cors', body:body}).then(finish).catch(function(){ btn.disabled = false; btn.textContent = 'Unlock the setups →'; err.textContent = 'Network problem. Please try again, or message me on WhatsApp.'; });
+    fetch(C.formEndpoint, {method:'POST', mode:'no-cors', body:body}).then(finish).catch(function(){ btn.disabled = false; btn.textContent = 'Download the PDFs →'; err.textContent = 'Network problem. Please try again, or message me on WhatsApp.'; });
   });
 })();
 </script>
