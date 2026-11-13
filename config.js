@@ -6,9 +6,8 @@ window.STG_CONFIG = {
   youtube: "https://www.youtube.com/@SwingTradingGuideIN",
   instagram: "https://www.instagram.com/swing_trading._.guide/",
   formEndpoint: "https://script.google.com/macros/s/AKfycbzdmoKSrmfVFQouothzSM2_MHpGsePF-bRV5QVdzBMKBb9Zs0Lm5sOqCmyynPLe0ZgwHw/exec",                           // Apps Script web app /exec URL (see apps-script/Code.gs)
-  resources: [                                // shown after sign-up; Drive "anyone with link" view URLs
-    { title: "25 Retracement Setups", note: "PDF", url: "" },      // trigger word PULLBACK
-    { title: "25 Break and Retest Setups", note: "PDF", url: "" }, // trigger word BREAKOUT
-    { title: "25 Structural Reversal Setups", note: "PDF", url: "" } // trigger word REVERSAL
+  resources: [                                // shown after sign-up; PDFs hosted in this repo under /pdf; reversal booklet added when built
+    { title: "Retracement Setups Booklet", note: "PDF", url: "https://swingtradingguide.github.io/pdf/STG_Retracement_Booklet.pdf" },
+    { title: "Break and Retest Setups Booklet", note: "PDF", url: "https://swingtradingguide.github.io/pdf/STG_Break_and_Retest_Booklet.pdf" }
   ]
 };
