@@ -796,7 +796,7 @@ h1 em,h2 em,h3 em,.lead em{font-style:normal}
     add('lk-sat', '', 2, .6, 46); add('lk-sat', '', 2, .6 + Math.PI, 46); add('lk-sat t', '', 1, 2.4, -80);
     var shoot = document.createElement('span'); shoot.className = 'lk-shoot'; sky.appendChild(shoot);
     function layout(){ var r = lk.getBoundingClientRect(); W = r.width; H = r.height; cx = W / 2; cy = H / 2;
-      orb = small ? [{ rx: W * .56, ry: W * .36 }, { rx: W * .48, ry: W * .31 }, { rx: W * .40, ry: W * .26 }]
+      orb = small ? [{ rx: W * .66, ry: H * .45 }, { rx: W * .57, ry: H * .39 }, { rx: W * .49, ry: H * .34 }]
                   : [{ rx: Math.min(W * .46, 680), ry: H * .45 }, { rx: Math.min(W * .39, 580), ry: H * .39 }, { rx: Math.min(W * .33, 490), ry: H * .34 }];
       var c = core.getBoundingClientRect(); box = { l: c.left - r.left - 16, r: c.right - r.left + 16, t: c.top - r.top - 12, b: c.bottom - r.top + 12 };
       items.forEach(function(it){ it.hw = it.sat ? 12 : it.el.offsetWidth / 2; it.hh = it.sat ? 12 : 8; });
