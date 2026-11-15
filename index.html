@@ -131,10 +131,8 @@ footer a:hover{color:var(--teal)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 /* ---- tool page ---- */
-.hero2{position:relative;padding:48px 0 12px;overflow:hidden;background:
-  radial-gradient(1100px 520px at 50% -4%,rgba(46,139,152,.11),transparent 70%),
-  radial-gradient(520px 320px at 4% 60%,rgba(79,165,132,.12),transparent 70%)}
-.hero2::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(27,42,92,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(27,42,92,.03) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,#000 15%,transparent 80%);-webkit-mask-image:linear-gradient(180deg,#000 15%,transparent 80%)}
+.hero2{position:relative;padding:48px 0 12px;overflow:hidden;background:transparent}
+.hero2::before{display:none;content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(27,42,92,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(27,42,92,.03) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,#000 15%,transparent 80%);-webkit-mask-image:linear-gradient(180deg,#000 15%,transparent 80%)}
 .hero2-grid{position:relative;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center}
 .hero2 h1{font-size:clamp(38px,4.6vw,62px);margin:14px 0 18px;line-height:1.04}
 .eyebrow{margin:0 0 14px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
