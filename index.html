@@ -132,9 +132,9 @@ footer a:hover{color:var(--teal)}
 .reveal.in{opacity:1;transform:none}
 /* ---- tool page ---- */
 .hero2{position:relative;padding:48px 0 12px;overflow:hidden;background:
-  radial-gradient(720px 440px at 82% 18%,rgba(46,139,152,.14),transparent 70%),
+  radial-gradient(1100px 520px at 50% -4%,rgba(46,139,152,.11),transparent 70%),
   radial-gradient(520px 320px at 4% 60%,rgba(79,165,132,.12),transparent 70%)}
-.hero2::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(27,42,92,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(27,42,92,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,#000 15%,transparent 80%);-webkit-mask-image:linear-gradient(180deg,#000 15%,transparent 80%)}
+.hero2::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(27,42,92,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(27,42,92,.03) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,#000 15%,transparent 80%);-webkit-mask-image:linear-gradient(180deg,#000 15%,transparent 80%)}
 .hero2-grid{position:relative;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center}
 .hero2 h1{font-size:clamp(38px,4.6vw,62px);margin:14px 0 18px;line-height:1.04}
 .eyebrow{margin:0 0 14px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
@@ -235,29 +235,37 @@ footer a:hover{color:var(--teal)}
 .books .cover.vid{height:auto;padding:0;background:#fff;border:1px solid var(--line);box-shadow:0 10px 22px -14px rgba(22,32,63,.4)}
 .cover.vid::after{display:none}
 .hero2-grid>*{min-width:0}
-/* lockup: logo + name centred on the hero canvas, concept words drift around it */
-.lockup{position:relative;width:100%;min-height:330px;margin:0 0 18px;display:grid;place-items:center;overflow:hidden;--px:0px;--py:0px}
-.lk-core{position:relative;z-index:3;display:flex;align-items:center;gap:28px;padding:0 24px}
-.lk-logo{width:156px;height:auto;flex:none;filter:drop-shadow(0 12px 18px rgba(22,32,63,.22));animation:lkfloat 6s ease-in-out infinite}
-@keyframes lkfloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2.5deg)}}
-.lk-text{text-align:left}
-.lk-name{font:800 clamp(30px,4.4vw,58px)/1.05 var(--sans);letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+/* lockup: one centred emblem, hairline orbits, a few words travelling on them, polestars, one shooting star */
+.lockup{position:relative;width:100%;height:clamp(430px,62vh,560px);margin:0 0 8px;display:grid;place-items:center;overflow:hidden}
+.lk-sky{position:absolute;inset:0;pointer-events:none;transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .6s ease-out}
+.lk-orbits{position:absolute;inset:0;overflow:visible}
+.lk-ring{fill:none;stroke:#16203F;stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.8s cubic-bezier(.2,.7,.2,1)}
+.lk-ring.r0{stroke-opacity:.07}.lk-ring.r1{stroke-opacity:.05;transition-delay:.3s}.lk-ring.r2{stroke-opacity:.09;transition-delay:.6s}
+.lockup.ready .lk-ring{stroke-dashoffset:0}
+.lk-word{position:absolute;left:0;top:0;white-space:nowrap;font:600 12.5px/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:#16203F;opacity:0;will-change:transform,opacity}
+.lk-sat{position:absolute;left:0;top:0;width:4px;height:4px;border-radius:50%;background:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,.14),0 0 14px 3px rgba(201,162,75,.42);opacity:0}
+.lk-sat::before,.lk-sat::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:1px;margin:-.5px 0 0 -11px;background:linear-gradient(90deg,transparent,#C9A24B,transparent)}
+.lk-sat::after{transform:rotate(90deg)}
+.lk-sat.t{background:#2E8B98;box-shadow:0 0 0 3px rgba(46,139,152,.12),0 0 12px 2px rgba(46,139,152,.38)}
+.lk-sat.t::before,.lk-sat.t::after{display:none}
+.lk-star{position:absolute;border-radius:50%;background:#2E8B98;animation:lktw 6s ease-in-out infinite}
+@keyframes lktw{0%,100%{opacity:.1}50%{opacity:.45}}
+.lk-shoot{position:absolute;width:130px;height:1px;background:linear-gradient(90deg,rgba(46,139,152,0),rgba(46,139,152,.9));opacity:0}
+.lk-shoot::after{content:"";position:absolute;right:-2px;top:-1.5px;width:4px;height:4px;border-radius:50%;background:#2E8B98;box-shadow:0 0 8px 2px rgba(46,139,152,.5)}
+.lk-shoot.go{animation:lkgo 1.4s cubic-bezier(.3,.6,.4,1) forwards}
+@keyframes lkgo{0%{opacity:0;transform:rotate(152deg) translateX(0)}15%{opacity:1}100%{opacity:0;transform:rotate(152deg) translateX(340px)}}
+.lk-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px}
+.lk-logo{width:clamp(96px,9vw,132px);height:auto;margin-bottom:20px;filter:drop-shadow(0 16px 24px rgba(22,32,63,.22));animation:lkfloat 8s ease-in-out infinite}
+@keyframes lkfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.lk-name{font:800 clamp(30px,4.6vw,64px)/1 var(--sans);letter-spacing:.05em;color:var(--ink)}
 .lk-name em{font-style:normal;color:#C9A24B}
-.lk-rule{display:flex;align-items:center;margin:14px 0 12px}
-.lk-rule i{display:block;width:130px;height:2px;background:linear-gradient(90deg,transparent,#C9A24B)}
+.lk-rule{display:flex;align-items:center;justify-content:center;margin:20px 0 16px}
+.lk-rule i{display:block;width:clamp(60px,9vw,140px);height:1px;background:linear-gradient(90deg,transparent,#C9A24B)}
 .lk-rule i:last-child{background:linear-gradient(270deg,transparent,#C9A24B)}
-.lk-rule b{width:9px;height:9px;background:#C9A24B;transform:rotate(45deg);margin:0 7px}
-.lk-sub{font-weight:600;font-size:clamp(12px,1.5vw,18px);letter-spacing:.3em;text-transform:uppercase;color:var(--slate)}
-.lk-words,.lk-stars{position:absolute;inset:0;pointer-events:none}
-.lw{position:absolute;left:var(--x);top:var(--y);transform:translate3d(calc(var(--px)*var(--d)),calc(var(--py)*var(--d)),0);transition:transform .25s ease-out}
-.lw span{display:block;font-weight:700;font-size:calc(11px + 6px*var(--d));letter-spacing:.14em;text-transform:uppercase;color:var(--c);opacity:calc(.5 + .4*var(--d));text-shadow:0 0 10px rgba(255,255,255,.9);animation:lkdrift var(--t) ease-in-out infinite alternate}
-@keyframes lkdrift{from{transform:translate(0,0) rotate(var(--r0))}to{transform:translate(var(--dx),var(--dy)) rotate(var(--r1))}}
-.lk-stars i{position:absolute;border-radius:50%;background:var(--c);animation:lktw var(--t) ease-in-out infinite}
-@keyframes lktw{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.9;transform:scale(1.5)}}
-.lk-streak{position:absolute;width:70px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#2E8B98);opacity:0;transform:rotate(-18deg);animation:lkshoot 9s linear infinite}
-@keyframes lkshoot{0%{opacity:0;transform:translate(0,0) rotate(-18deg)}4%{opacity:.8}14%{opacity:0;transform:translate(-190px,62px) rotate(-18deg)}100%{opacity:0}}
-@media (max-width:760px){.lockup{min-height:300px}.lk-core{flex-direction:column;gap:12px;text-align:center}.lk-text{text-align:center}.lk-rule{justify-content:center}.lk-rule i{width:70px}.lk-name{white-space:normal}.lk-logo{width:112px}.lw.hide-m{display:none}}
-@media (prefers-reduced-motion:reduce){.lk-logo,.lw span,.lk-stars i,.lk-streak{animation:none}.lw{transition:none}}
+.lk-rule b{width:7px;height:7px;background:#C9A24B;transform:rotate(45deg);margin:0 10px}
+.lk-sub{font:600 clamp(11px,1.2vw,15px)/1 var(--sans);letter-spacing:.42em;margin-right:-.42em;text-transform:uppercase;color:var(--slate)}
+@media (max-width:760px){.lockup{height:440px}.lk-word{font-size:10px;letter-spacing:.22em}.lk-logo{margin-bottom:14px}}
+@media (prefers-reduced-motion:reduce){.lk-logo,.lk-star{animation:none}.lk-ring,.lk-sky{transition:none}}
 .hero2 h1{overflow-wrap:break-word}
 .wm-logo{display:block;margin:0 auto 14px;height:auto;filter:drop-shadow(0 8px 14px rgba(22,32,63,.18))}.wm-logo.sm{margin:0 0 10px}
 .hero2 .stage::before{content:"";position:absolute;right:-4%;bottom:-6%;width:46%;aspect-ratio:1;background:url(assets/logo-mark.png) center/contain no-repeat;opacity:.07;pointer-events:none}
@@ -323,12 +331,13 @@ footer a:hover{color:var(--teal)}
 
 
 <header class="hero2" id="top">
-    <div class="lockup reveal" id="lockup">
-      <div class="lk-stars" id="lkStars" aria-hidden="true"><span class="lk-streak" style="left:68%;top:14%"></span><span class="lk-streak" style="left:92%;top:58%;animation-delay:4.5s"></span></div>
-      <div class="lk-words" aria-hidden="true"><div class="lw " style="--x:6%;--y:18%;--d:1"><span style="--c:#147A43;--r0:-5deg;--r1:4deg;--dx:46px;--dy:10px;--t:11s">Higher High</span></div><div class="lw hide-m" style="--x:24%;--y:8%;--d:.6"><span style="--c:#2E8B98;--r0:3deg;--r1:-3deg;--dx:60px;--dy:14px;--t:13s">Momentum</span></div><div class="lw " style="--x:74%;--y:10%;--d:1.1"><span style="--c:#147A43;--r0:-4deg;--r1:5deg;--dx:-50px;--dy:12px;--t:12s">Breakout</span></div><div class="lw hide-m" style="--x:86%;--y:38%;--d:.8"><span style="--c:#2E8B98;--r0:6deg;--r1:-2deg;--dx:-34px;--dy:24px;--t:14s">Reversal</span></div><div class="lw hide-m" style="--x:80%;--y:74%;--d:.7"><span style="--c:#C9A24B;--r0:-5deg;--r1:4deg;--dx:-60px;--dy:-16px;--t:15s">Golden Ratio</span></div><div class="lw hide-m" style="--x:8%;--y:72%;--d:1"><span style="--c:#5B6B8C;--r0:4deg;--r1:-5deg;--dx:48px;--dy:-14px;--t:12s">Lower Low</span></div><div class="lw hide-m" style="--x:30%;--y:86%;--d:.6"><span style="--c:#2E8B98;--r0:-3deg;--r1:4deg;--dx:64px;--dy:-10px;--t:16s">Retracement</span></div><div class="lw " style="--x:60%;--y:84%;--d:1.15"><span style="--c:#147A43;--r0:5deg;--r1:-4deg;--dx:-44px;--dy:-12px;--t:11s">Higher Low</span></div><div class="lw hide-m" style="--x:46%;--y:4%;--d:.5"><span style="--c:#2E8B98;--r0:2deg;--r1:-2deg;--dx:50px;--dy:10px;--t:17s">Uptrend</span></div><div class="lw hide-m" style="--x:52%;--y:92%;--d:.5"><span style="--c:#5B6B8C;--r0:-2deg;--r1:3deg;--dx:-56px;--dy:-8px;--t:18s">Downtrend</span></div></div>
+    <div class="lockup" id="lockup">
+      <div class="lk-sky" id="lkSky" aria-hidden="true"><svg class="lk-orbits" id="lkOrb"></svg></div>
       <div class="lk-core">
-        <img class="lk-logo" src="assets/logo-mark.png" alt="Swing Trading Guide logo" width="156" height="137">
-        <div class="lk-text"><div class="lk-name">SWING TRADING <em>GUIDE</em></div><div class="lk-rule"><i></i><b></b><i></i></div><div class="lk-sub">Technical analysis tool</div></div>
+        <img class="lk-logo" src="assets/logo-mark.png" alt="Swing Trading Guide logo" width="132" height="116">
+        <div class="lk-name">SWING TRADING <em>GUIDE</em></div>
+        <div class="lk-rule"><i></i><b></b><i></i></div>
+        <div class="lk-sub">Technical analysis tool</div>
       </div>
     </div>
   <div class="wrap">
@@ -746,13 +755,41 @@ footer a:hover{color:var(--teal)}
   })();
 
   // brand clip: stop for reduced motion
-  (function(){ var lk = document.getElementById('lockup'), st = document.getElementById('lkStars'); if(!lk) return;
-    var cols = ['#2E8B98','#147A43','#C9A24B'], h = '';
-    for(var i = 0; i < 34; i++){ var sz = 1.5 + (i % 3) * 1.2; h += '<i style="left:' + ((i * 37) % 100) + '%;top:' + ((i * 53 + 11) % 96) + '%;width:' + sz + 'px;height:' + sz + 'px;--c:' + cols[i % 3] + ';--t:' + (3 + (i % 5)) + 's;animation-delay:-' + (i % 7) + 's"></i>'; }
-    st.insertAdjacentHTML('beforeend', h);
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(pointer: coarse)').matches) return;
-    lk.addEventListener('pointermove', function(e){ var r = lk.getBoundingClientRect(); lk.style.setProperty('--px', ((e.clientX - r.left) / r.width - .5) * -34 + 'px'); lk.style.setProperty('--py', ((e.clientY - r.top) / r.height - .5) * -22 + 'px'); });
-    lk.addEventListener('pointerleave', function(){ lk.style.setProperty('--px', '0px'); lk.style.setProperty('--py', '0px'); });
+  (function(){ var lk = document.getElementById('lockup'), sky = document.getElementById('lkSky'), svg = document.getElementById('lkOrb'); if(!lk) return;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, small = innerWidth < 760;
+    var core = lk.querySelector('.lk-core'), box = null, TILT = -5 * Math.PI / 180, W = 0, H = 0, cx = 0, cy = 0, orb = [], items = [], t = 0, run = true, prev = 0;
+    var h = ''; for(var i = 0; i < 24; i++){ var sz = i % 5 === 0 ? 2.4 : 1.4; h += '<i class="lk-star" style="left:' + ((i * 37 + 7) % 100) + '%;top:' + ((i * 61 + 13) % 100) + '%;width:' + sz + 'px;height:' + sz + 'px;animation-delay:-' + (i % 9) * .7 + 's"></i>'; }
+    sky.insertAdjacentHTML('beforeend', h);
+    function add(cls, txt, o, a, period){ var e = document.createElement('span'); e.className = cls; if(txt) e.textContent = txt; sky.appendChild(e); items.push({ el: e, o: o, a: a, sp: 2 * Math.PI / period, sat: !txt }); }
+    var words = small ? ['Higher High', 'Breakout', 'Higher Low', 'Reversal'] : ['Higher High', 'Breakout', 'Retracement', 'Higher Low', 'Reversal', 'Momentum'];
+    words.forEach(function(w, i){ var outer = i % 2 === 0, n = Math.ceil(words.length / 2), k = Math.floor(i / 2); add('lk-word', w, outer ? 0 : 1, (k / n) * Math.PI * 2 + (outer ? .5 : 1.4), outer ? 120 : -150); });
+    add('lk-sat', '', 2, .6, 46); add('lk-sat', '', 2, .6 + Math.PI, 46); add('lk-sat t', '', 1, 2.4, -80);
+    var shoot = document.createElement('span'); shoot.className = 'lk-shoot'; sky.appendChild(shoot);
+    function layout(){ var r = lk.getBoundingClientRect(); W = r.width; H = r.height; cx = W / 2; cy = H / 2;
+      orb = small ? [{ rx: W * .38, ry: H * .46 }, { rx: W * .33, ry: H * .40 }, { rx: W * .28, ry: H * .34 }]
+                  : [{ rx: Math.min(W * .46, 680), ry: H * .45 }, { rx: Math.min(W * .39, 580), ry: H * .39 }, { rx: Math.min(W * .33, 490), ry: H * .34 }];
+      var c = core.getBoundingClientRect(); box = { l: c.left - r.left - 16, r: c.right - r.left + 16, t: c.top - r.top - 12, b: c.bottom - r.top + 12 };
+      items.forEach(function(it){ it.hw = it.sat ? 12 : it.el.offsetWidth / 2; it.hh = it.sat ? 12 : 8; });
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.innerHTML = orb.map(function(o, i){ return '<ellipse class="lk-ring r' + i + '" pathLength="1" cx="' + cx + '" cy="' + cy + '" rx="' + o.rx.toFixed(1) + '" ry="' + o.ry.toFixed(1) + '" transform="rotate(-5 ' + cx + ' ' + cy + ')"/>'; }).join(''); }
+    function place(){ var ct = Math.cos(TILT), st = Math.sin(TILT);
+      items.forEach(function(it){ var o = orb[it.o], a = it.a + it.sp * t, x = o.rx * Math.cos(a), y = o.ry * Math.sin(a), d = (Math.sin(a) + 1) / 2;
+        var X = cx + x * ct - y * st, Y = cy + x * st + y * ct, sc = .84 + .2 * d;
+        it.el.style.transform = 'translate3d(' + X.toFixed(1) + 'px,' + Y.toFixed(1) + 'px,0) translate(-50%,-50%) scale(' + sc.toFixed(3) + ')';
+        var gx = Math.max(box.l - (X + it.hw), 0, (X - it.hw) - box.r), gy = Math.max(box.t - (Y + it.hh), 0, (Y - it.hh) - box.b), k = Math.min(1, Math.hypot(gx, gy) / 36);
+        it.el.style.opacity = ((it.sat ? .45 + .5 * d : .22 + .3 * d) * k).toFixed(3);
+        if(!it.sat) it.el.style.filter = 'blur(' + ((1 - d) * .8).toFixed(2) + 'px)'; }); }
+    layout(); place(); requestAnimationFrame(function(){ lk.classList.add('ready'); });
+    addEventListener('resize', function(){ layout(); place(); });
+    if(reduce) return;
+    if('IntersectionObserver' in window) new IntersectionObserver(function(es){ run = es[0].isIntersecting; }).observe(lk);
+    function tick(now){ var dt = prev ? Math.min((now - prev) / 1000, .1) : 0; prev = now; if(run){ t += dt; place(); } requestAnimationFrame(tick); }
+    requestAnimationFrame(tick);
+    (function fire(){ if(run){ shoot.style.left = (W * (.5 + Math.random() * .42)).toFixed(0) + 'px'; shoot.style.top = (H * (.04 + Math.random() * .26)).toFixed(0) + 'px'; shoot.classList.remove('go'); void shoot.offsetWidth; shoot.classList.add('go'); } setTimeout(fire, 7000 + Math.random() * 5000); })();
+    if(!matchMedia('(pointer: coarse)').matches){
+      lk.addEventListener('pointermove', function(e){ var r = lk.getBoundingClientRect(); sky.style.setProperty('--px', (((e.clientX - r.left) / r.width - .5) * -16).toFixed(1) + 'px'); sky.style.setProperty('--py', (((e.clientY - r.top) / r.height - .5) * -10).toFixed(1) + 'px'); });
+      lk.addEventListener('pointerleave', function(){ sky.style.setProperty('--px', '0px'); sky.style.setProperty('--py', '0px'); });
+    }
   })();
 
   // download dialog
