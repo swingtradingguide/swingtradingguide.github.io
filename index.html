@@ -514,7 +514,7 @@ h1 em,h2 em,h3 em,.lead em{font-style:normal}
       <div><h5>Follow</h5><ul><li><a class="js-yt" href="#">YouTube</a></li><li><a class="js-ig" href="#">Instagram</a></li><li><a class="js-ch" href="#">WhatsApp Channel</a></li></ul></div>
       <div><h5>Contact</h5><ul><li><a class="js-wa" href="#">WhatsApp: +91 73971 33633</a></li><li><a href="#free">Free setups</a></li><li><a href="#faq">Privacy and FAQ</a></li></ul></div>
     </div>
-    <div class="disc">Education and information tool only. It is not investment advice or research and carries no guarantee. Swing Trading Guide does not give buy, sell or target recommendations. Trading involves risk of loss; please consult a SEBI-registered adviser before investing. Charts and setups use real historical market data for teaching. Your details are used only to send what you requested and are never sold.</div>
+    <div class="disc">Education and information tool only. It is not investment advice or research and carries no guarantee. Swing Trading Guide does not give buy, sell or target recommendations. Trading involves risk of loss; please consult a SEBI-registered adviser before investing. Charts and setups use real historical market data for teaching. Your details are used only to send what you requested and are never sold. This page uses Meta Pixel and Microsoft Clarity cookies to measure visits and improve the page.</div>
   </div>
 </footer>
 
@@ -548,6 +548,36 @@ h1 em,h2 em,h3 em,.lead em{font-style:normal}
 <div class="mbar"><a class="btn btn-wa js-wa" href="#"><svg><use href="#wa"/></svg>Contact us</a><a class="btn btn-dark js-ch" href="#"><svg><use href="#ch"/></svg>Join Channel</a></div>
 
 <script src="config.js"></script>
+<script>
+/* Analytics: Meta Pixel + Microsoft Clarity, IDs from config.js. stgTrack(name) logs a standard or custom Pixel event. */
+(function(){
+  var C = window.STG_CONFIG || {}, STD = {Lead:1, Contact:1, Subscribe:1, ViewContent:1};
+  if(C.metaPixelId){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', C.metaPixelId); fbq('track', 'PageView');
+  }
+  if(C.clarityId){
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script',C.clarityId);
+  }
+  window.stgTrack = function(name, params){
+    try{ if(window.fbq) fbq(STD[name] ? 'track' : 'trackCustom', name, params || {}); if(window.clarity) clarity('event', name); }catch(e){}
+  };
+  // taps: WhatsApp chat, Channel, PDF, booklet form open
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a,button'); if(!a) return;
+    var h = a.getAttribute('href') || '';
+    if(/wa\.me\//.test(a.href || '')) stgTrack('Contact');
+    else if(a.classList.contains('js-ch') || /whatsapp\.com\/channel/.test(a.href || '')) stgTrack('Subscribe');
+    else if(/\.pdf($|\?)/i.test(h)) stgTrack('PdfOpen');
+  }, true);
+  // sections seen (once each)
+  document.addEventListener('DOMContentLoaded', function(){
+    if(!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ stgTrack('ViewContent', {content_name: en.target.id}); io.unobserve(en.target); } }); }, {threshold: .4});
+    ['cycle', 'tool', 'proof', 'day', 'free', 'faq'].forEach(function(id){ var el = document.getElementById(id); if(el) io.observe(el); });
+  });
+})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
@@ -766,7 +796,7 @@ h1 em,h2 em,h3 em,.lead em{font-style:normal}
     add('lk-sat', '', 2, .6, 46); add('lk-sat', '', 2, .6 + Math.PI, 46); add('lk-sat t', '', 1, 2.4, -80);
     var shoot = document.createElement('span'); shoot.className = 'lk-shoot'; sky.appendChild(shoot);
     function layout(){ var r = lk.getBoundingClientRect(); W = r.width; H = r.height; cx = W / 2; cy = H / 2;
-      orb = small ? [{ rx: W * .38, ry: H * .46 }, { rx: W * .33, ry: H * .40 }, { rx: W * .28, ry: H * .34 }]
+      orb = small ? [{ rx: W * .56, ry: W * .36 }, { rx: W * .48, ry: W * .31 }, { rx: W * .40, ry: W * .26 }]
                   : [{ rx: Math.min(W * .46, 680), ry: H * .45 }, { rx: Math.min(W * .39, 580), ry: H * .39 }, { rx: Math.min(W * .33, 490), ry: H * .34 }];
       var c = core.getBoundingClientRect(); box = { l: c.left - r.left - 16, r: c.right - r.left + 16, t: c.top - r.top - 12, b: c.bottom - r.top + 12 };
       items.forEach(function(it){ it.hw = it.sat ? 12 : it.el.offsetWidth / 2; it.hh = it.sat ? 12 : 8; });
@@ -794,7 +824,7 @@ h1 em,h2 em,h3 em,.lead em{font-style:normal}
 
   // download dialog
   var modal = document.getElementById('pdfModal');
-  function openModal(e){ if(e) e.preventDefault(); modal.hidden = false; document.body.style.overflow = 'hidden'; }
+  function openModal(e){ if(e) e.preventDefault(); if(window.stgTrack) stgTrack('FormOpen'); modal.hidden = false; document.body.style.overflow = 'hidden'; }
   function closeModal(){ modal.hidden = true; document.body.style.overflow = ''; }
   document.querySelectorAll('.js-pdf').forEach(function(a){ a.addEventListener('click', openModal); });
   modal.querySelectorAll('[data-close]').forEach(function(a){ a.addEventListener('click', closeModal); });
@@ -816,7 +846,7 @@ h1 em,h2 em,h3 em,.lead em{font-style:normal}
     btn.disabled = true; btn.textContent = 'Sending...';
     var body = new URLSearchParams({name:name, phone:'+91' + phone, email:email, city:city, consent:'yes', src:src, page:location.pathname, ua:navigator.userAgent.slice(0, 120)});
     var finish = function(){
-      form.style.display = 'none';
+      form.style.display = 'none'; if(window.stgTrack) stgTrack('Lead');
       document.getElementById('d-name').textContent = name.split(' ')[0];
       var box = document.getElementById('d-links'); box.textContent = '';
       var p = document.createElement('p'); p.className = 'sub';
