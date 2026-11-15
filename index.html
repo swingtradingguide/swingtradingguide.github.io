@@ -235,19 +235,29 @@ footer a:hover{color:var(--teal)}
 .books .cover.vid{height:auto;padding:0;background:#fff;border:1px solid var(--line);box-shadow:0 10px 22px -14px rgba(22,32,63,.4)}
 .cover.vid::after{display:none}
 .hero2-grid>*{min-width:0}
-.brandclip{max-width:980px;margin:0 auto 44px;perspective:1400px}
-.b3-float{animation:b3float 6s ease-in-out infinite}
-@keyframes b3float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.b3-card{position:relative;transform-style:preserve-3d;transform:rotateX(var(--rx,5deg)) rotateY(var(--ry,-9deg));transition:transform .18s ease-out;will-change:transform}
-.b3-card::before,.b3-card::after{content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none}
-.b3-card::before{transform:translateZ(-22px);background:#C9D9E2;box-shadow:0 38px 50px -22px rgba(22,32,63,.45)}
-.b3-card::after{transform:translateZ(-11px);background:#DCE8EE;border:1px solid #C3D4DD}
-.b3-face{position:relative;border-radius:22px;overflow:hidden;background:#fff;border:1px solid #D3E0E6;box-shadow:inset 0 0 0 1px rgba(255,255,255,.8)}
-.b3-face video{display:block;width:100%;height:auto}
-.b3-glare{position:absolute;inset:0;border-radius:22px;pointer-events:none;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.55),rgba(255,255,255,0) 55%);mix-blend-mode:soft-light}
-.b3-chip{position:absolute;right:-14px;top:-16px;width:62px;height:62px;border-radius:50%;background:#fff url(assets/logo-mark.png) center/78% no-repeat;border:1px solid #D3E0E6;box-shadow:0 16px 24px -10px rgba(22,32,63,.45);transform:translateZ(46px)}
-@media (max-width:600px){.b3-chip{width:48px;height:48px;right:-6px;top:-10px}}
-@media (prefers-reduced-motion:reduce){.b3-float{animation:none}.b3-card{transition:none}}
+/* lockup: logo + name centred on the hero canvas, concept words drift around it */
+.lockup{position:relative;width:100%;min-height:330px;margin:0 0 18px;display:grid;place-items:center;overflow:hidden;--px:0px;--py:0px}
+.lk-core{position:relative;z-index:3;display:flex;align-items:center;gap:28px;padding:0 24px}
+.lk-logo{width:156px;height:auto;flex:none;filter:drop-shadow(0 12px 18px rgba(22,32,63,.22));animation:lkfloat 6s ease-in-out infinite}
+@keyframes lkfloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2.5deg)}}
+.lk-text{text-align:left}
+.lk-name{font:800 clamp(30px,4.4vw,58px)/1.05 var(--sans);letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+.lk-name em{font-style:normal;color:#C9A24B}
+.lk-rule{display:flex;align-items:center;margin:14px 0 12px}
+.lk-rule i{display:block;width:130px;height:2px;background:linear-gradient(90deg,transparent,#C9A24B)}
+.lk-rule i:last-child{background:linear-gradient(270deg,transparent,#C9A24B)}
+.lk-rule b{width:9px;height:9px;background:#C9A24B;transform:rotate(45deg);margin:0 7px}
+.lk-sub{font-weight:600;font-size:clamp(12px,1.5vw,18px);letter-spacing:.3em;text-transform:uppercase;color:var(--slate)}
+.lk-words,.lk-stars{position:absolute;inset:0;pointer-events:none}
+.lw{position:absolute;left:var(--x);top:var(--y);transform:translate3d(calc(var(--px)*var(--d)),calc(var(--py)*var(--d)),0);transition:transform .25s ease-out}
+.lw span{display:block;font-weight:700;font-size:calc(11px + 6px*var(--d));letter-spacing:.14em;text-transform:uppercase;color:var(--c);opacity:calc(.5 + .4*var(--d));text-shadow:0 0 10px rgba(255,255,255,.9);animation:lkdrift var(--t) ease-in-out infinite alternate}
+@keyframes lkdrift{from{transform:translate(0,0) rotate(var(--r0))}to{transform:translate(var(--dx),var(--dy)) rotate(var(--r1))}}
+.lk-stars i{position:absolute;border-radius:50%;background:var(--c);animation:lktw var(--t) ease-in-out infinite}
+@keyframes lktw{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.9;transform:scale(1.5)}}
+.lk-streak{position:absolute;width:70px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#2E8B98);opacity:0;transform:rotate(-18deg);animation:lkshoot 9s linear infinite}
+@keyframes lkshoot{0%{opacity:0;transform:translate(0,0) rotate(-18deg)}4%{opacity:.8}14%{opacity:0;transform:translate(-190px,62px) rotate(-18deg)}100%{opacity:0}}
+@media (max-width:760px){.lockup{min-height:300px}.lk-core{flex-direction:column;gap:12px;text-align:center}.lk-text{text-align:center}.lk-rule{justify-content:center}.lk-rule i{width:70px}.lk-name{white-space:normal}.lk-logo{width:112px}.lw.hide-m{display:none}}
+@media (prefers-reduced-motion:reduce){.lk-logo,.lw span,.lk-stars i,.lk-streak{animation:none}.lw{transition:none}}
 .hero2 h1{overflow-wrap:break-word}
 .wm-logo{display:block;margin:0 auto 14px;height:auto;filter:drop-shadow(0 8px 14px rgba(22,32,63,.18))}.wm-logo.sm{margin:0 0 10px}
 .hero2 .stage::before{content:"";position:absolute;right:-4%;bottom:-6%;width:46%;aspect-ratio:1;background:url(assets/logo-mark.png) center/contain no-repeat;opacity:.07;pointer-events:none}
@@ -313,8 +323,15 @@ footer a:hover{color:var(--teal)}
 
 
 <header class="hero2" id="top">
+    <div class="lockup reveal" id="lockup">
+      <div class="lk-stars" id="lkStars" aria-hidden="true"><span class="lk-streak" style="left:68%;top:14%"></span><span class="lk-streak" style="left:92%;top:58%;animation-delay:4.5s"></span></div>
+      <div class="lk-words" aria-hidden="true"><div class="lw " style="--x:6%;--y:18%;--d:1"><span style="--c:#147A43;--r0:-5deg;--r1:4deg;--dx:46px;--dy:10px;--t:11s">Higher High</span></div><div class="lw hide-m" style="--x:24%;--y:8%;--d:.6"><span style="--c:#2E8B98;--r0:3deg;--r1:-3deg;--dx:60px;--dy:14px;--t:13s">Momentum</span></div><div class="lw " style="--x:74%;--y:10%;--d:1.1"><span style="--c:#147A43;--r0:-4deg;--r1:5deg;--dx:-50px;--dy:12px;--t:12s">Breakout</span></div><div class="lw hide-m" style="--x:86%;--y:38%;--d:.8"><span style="--c:#2E8B98;--r0:6deg;--r1:-2deg;--dx:-34px;--dy:24px;--t:14s">Reversal</span></div><div class="lw hide-m" style="--x:80%;--y:74%;--d:.7"><span style="--c:#C9A24B;--r0:-5deg;--r1:4deg;--dx:-60px;--dy:-16px;--t:15s">Golden Ratio</span></div><div class="lw hide-m" style="--x:8%;--y:72%;--d:1"><span style="--c:#5B6B8C;--r0:4deg;--r1:-5deg;--dx:48px;--dy:-14px;--t:12s">Lower Low</span></div><div class="lw hide-m" style="--x:30%;--y:86%;--d:.6"><span style="--c:#2E8B98;--r0:-3deg;--r1:4deg;--dx:64px;--dy:-10px;--t:16s">Retracement</span></div><div class="lw " style="--x:60%;--y:84%;--d:1.15"><span style="--c:#147A43;--r0:5deg;--r1:-4deg;--dx:-44px;--dy:-12px;--t:11s">Higher Low</span></div><div class="lw hide-m" style="--x:46%;--y:4%;--d:.5"><span style="--c:#2E8B98;--r0:2deg;--r1:-2deg;--dx:50px;--dy:10px;--t:17s">Uptrend</span></div><div class="lw hide-m" style="--x:52%;--y:92%;--d:.5"><span style="--c:#5B6B8C;--r0:-2deg;--r1:3deg;--dx:-56px;--dy:-8px;--t:18s">Downtrend</span></div></div>
+      <div class="lk-core">
+        <img class="lk-logo" src="assets/logo-mark.png" alt="Swing Trading Guide logo" width="156" height="137">
+        <div class="lk-text"><div class="lk-name">SWING TRADING <em>GUIDE</em></div><div class="lk-rule"><i></i><b></b><i></i></div><div class="lk-sub">Technical analysis tool</div></div>
+      </div>
+    </div>
   <div class="wrap">
-    <div class="brandclip" id="brand3d"><div class="b3-float"><div class="b3-card" id="b3card"><div class="b3-face"><video id="brandVid" autoplay muted loop playsinline preload="auto" poster="assets/hero-brand-poster.png" aria-label="Swing Trading Guide, technical analysis tool"><source src="assets/hero-brand-drift.mp4" type="video/mp4"></video><div class="b3-glare"></div></div><span class="b3-chip" aria-hidden="true"></span></div></div></div>
     <div class="hero2-grid">
       <div class="reveal">
         <p class="eyebrow">Uptrend and Downtrend, side by side</p>
@@ -729,15 +746,14 @@ footer a:hover{color:var(--teal)}
   })();
 
   // brand clip: stop for reduced motion
-  (function(){ var w = document.getElementById('brand3d'), c = document.getElementById('b3card');
-    if(!w || !c || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    w.addEventListener('pointermove', function(e){ var r = w.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      c.style.setProperty('--ry', ((x - .5) * 22).toFixed(1) + 'deg'); c.style.setProperty('--rx', ((.5 - y) * 14).toFixed(1) + 'deg');
-      c.style.setProperty('--gx', (x * 100).toFixed(0) + '%'); c.style.setProperty('--gy', (y * 100).toFixed(0) + '%'); });
-    w.addEventListener('pointerleave', function(){ c.style.removeProperty('--rx'); c.style.removeProperty('--ry'); });
+  (function(){ var lk = document.getElementById('lockup'), st = document.getElementById('lkStars'); if(!lk) return;
+    var cols = ['#2E8B98','#147A43','#C9A24B'], h = '';
+    for(var i = 0; i < 34; i++){ var sz = 1.5 + (i % 3) * 1.2; h += '<i style="left:' + ((i * 37) % 100) + '%;top:' + ((i * 53 + 11) % 96) + '%;width:' + sz + 'px;height:' + sz + 'px;--c:' + cols[i % 3] + ';--t:' + (3 + (i % 5)) + 's;animation-delay:-' + (i % 7) + 's"></i>'; }
+    st.insertAdjacentHTML('beforeend', h);
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(pointer: coarse)').matches) return;
+    lk.addEventListener('pointermove', function(e){ var r = lk.getBoundingClientRect(); lk.style.setProperty('--px', ((e.clientX - r.left) / r.width - .5) * -34 + 'px'); lk.style.setProperty('--py', ((e.clientY - r.top) / r.height - .5) * -22 + 'px'); });
+    lk.addEventListener('pointerleave', function(){ lk.style.setProperty('--px', '0px'); lk.style.setProperty('--py', '0px'); });
   })();
-  (function(){ var vs = document.querySelectorAll('.sclip'); if(!('IntersectionObserver' in window)) return; var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.play().catch(function(){}); } else { e.target.pause(); } }); }, {threshold:.25}); vs.forEach(function(v){ io.observe(v); }); })();
-  (function(){ var v = document.getElementById('brandVid'); if(v && matchMedia('(prefers-reduced-motion: reduce)').matches){ v.removeAttribute('autoplay'); v.pause(); } })();
 
   // download dialog
   var modal = document.getElementById('pdfModal');
