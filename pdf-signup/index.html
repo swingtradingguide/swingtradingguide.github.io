@@ -81,11 +81,14 @@ h1{font-size:clamp(30px,6vw,52px);line-height:1.1;font-weight:700;margin:6px 0 1
 .pdf .tx{display:block;min-width:0}
 .pdf b{display:block;font-size:17px;line-height:1.25}
 .pdf small{display:block;color:var(--slate);font-size:14px;line-height:1.4;margin-top:4px}
-.pdf .chk{position:absolute;top:22px;right:22px;width:26px;height:26px;border-radius:8px;border:2px solid #fff;background:rgba(255,255,255,.9);box-shadow:0 0 0 1.5px var(--line);display:grid;place-items:center}
-.pdf .chk::after{content:"";width:12px;height:7px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.pdf .chk{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:12px;border:2px solid var(--teal);background:#fff;color:var(--teal);font-weight:700;font-size:16px;transition:background .2s,color .2s}
+.pdf .chk::before{content:"+";font-size:22px;line-height:1;font-weight:600}
+.pdf .chk::after{content:"Tap to add"}
+.pdf:hover .chk{background:#F0F8F9}
 .pdf input:checked~.box{border-color:var(--teal);background:#F0F8F9;box-shadow:0 0 0 4px rgba(46,139,152,.12)}
-.pdf input:checked~.box .chk{background:var(--teal);box-shadow:0 0 0 1.5px var(--teal)}
-.pdf input:checked~.box .chk::after{opacity:1}
+.pdf input:checked~.box .chk{background:var(--teal);color:#fff}
+.pdf input:checked~.box .chk::before{content:"✓";font-size:18px}
+.pdf input:checked~.box .chk::after{content:"Added"}
 .pdf input:focus-visible~.box{outline:3px solid var(--teal);outline-offset:3px}
 
 .fields{display:grid;grid-template-columns:1fr;gap:var(--gap);margin:0 0 var(--gap)}
